@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h> //library that allows a window to be opened
 
-
+//function specifically for reporting errors through GLFW
 void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
@@ -13,11 +13,14 @@ int main(int argc, char* argv[])
     glfwSetErrorCallback(error_callback);
 
     GLFWwindow* window;
+
     if(!glfwInit())
     {
         return -1;
     }
 
+    //these window 'hints' set opetions before creating the window.
+    //using OpenGL3.3
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -31,9 +34,10 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    //tells OpenGL to use this specific window since there could hypothetically be multiple.
     glfwMakeContextCurrent(window);
 
-
+    //initalizing GLEW to use modern OpenGL functions
     GLenum err = glewInit();
     if(err != GLEW_OK){
         fprintf(stderr, "Error initializing GLEW.\n");
@@ -47,13 +51,18 @@ int main(int argc, char* argv[])
 
     printf("USing OpenGL: %d.%d\n", glVersion[0], glVersion[1]);
 
+    //setting color preferences
     glClearColor(1.0, 0.0, 0.0, 1.0);
+
+    //game loop
     while(!glfwWindowShouldClose(window)){
         glClear(GL_COLOR_BUFFER_BIT);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
+
+    //cleanup
     glfwDestroyWindow(window);
     glfwTerminate();
 }
