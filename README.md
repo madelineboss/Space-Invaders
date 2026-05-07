@@ -7,7 +7,7 @@ I am following a tutorial to create a version of space invaders with C++. I will
 To run the program, use './main'
 
 ## Learning Documentation
-P1:
+### P1:
 - GLFW is a library that can be used to handle OS specific processes that OpenGL does not deal with.
 - OpenGL stands for Open Graphics Library, which is an API for rendering 2D and 3D vector graphics. 
 -GLEW is used for OpenGL function loading, detecting which OpenGL features the machine supports and loads them at runtime. 
